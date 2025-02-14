@@ -1,4 +1,10 @@
-import { Block } from "./classes/Block.js";
+import { IBlock } from "./classes/IBlock.js";
+import { JBlock } from "./classes/JBlock.js";
+import { LBlock } from "./classes/LBlock.js";
+import { OBlock } from "./classes/OBlock.js";
+import { SBlock } from "./classes/SBlock.js";
+import { TBlock } from "./classes/TBlock.js";
+import { ZBlock } from "./classes/ZBlock.js";
 
 const gameBoardTable = document.getElementById('game-board');
 
@@ -8,7 +14,10 @@ const speed = 400;
 
 const gameBoard = new Array(24).fill('').map(() => new Array(12).fill(''));
 
-let currentBlock = new Block(width);
+const blocks = [IBlock, JBlock, LBlock, OBlock, SBlock, TBlock, ZBlock];
+
+let blockIndex = Math.floor(Math.random() * blocks.length);
+let currentBlock = new blocks[blockIndex](width);
 
 console.log(currentBlock.name);
 
