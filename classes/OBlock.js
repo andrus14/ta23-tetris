@@ -9,7 +9,7 @@ class OBlock extends Block {
     shapeIndex = 0;
     class = 'o-block';
     height = 2;
-    width = 3;
+    width = 2;
 
     constructor ( width ) {
 

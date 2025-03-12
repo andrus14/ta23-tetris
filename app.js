@@ -72,7 +72,7 @@ function drawGameBoard () {
 
 function stopBlock () {
 
-    currentBlock.shape.forEach( c => {
+    currentBlock.shapes[0].forEach( c => {
 
         let [y, x] = c.split('_');
         gameBoard[parseInt(y) + currentBlock.positionY][parseInt(x) + currentBlock.positionX] = currentBlock.class;

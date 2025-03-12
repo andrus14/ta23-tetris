@@ -9,8 +9,8 @@ class IBlock extends Block {
     ];
     shapeIndex = 0;
     class = 'i-block';
-    height = 2;
-    width = 3;
+    height = 4;
+    width = 1;
 
     positionY;
     positionX;
