@@ -19,8 +19,6 @@ const blocks = [IBlock, JBlock, LBlock, OBlock, SBlock, TBlock, ZBlock];
 let blockIndex = Math.floor(Math.random() * blocks.length);
 let currentBlock = new blocks[blockIndex](width);
 
-console.log(currentBlock.name);
-
 const intervalId = setInterval(runGame, speed);
 
 function runGame () {
@@ -30,7 +28,8 @@ function runGame () {
         currentBlock.positionY++;
     } else {
         stopBlock();
-        currentBlock = new Block(width);
+        blockIndex = Math.floor(Math.random() * blocks.length);
+        currentBlock = new blocks[blockIndex](width);
     }
 
 }
@@ -52,7 +51,7 @@ function drawGameBoard () {
 
             // draw current block
             let cellCoordinates = (y - currentBlock.positionY) + '_' + (x - currentBlock.positionX);
-            if ( currentBlock.shape.includes(cellCoordinates) ) {
+            if ( currentBlock.shapes[0].includes(cellCoordinates) ) {
                 td.classList.add(currentBlock.class);
             }
 

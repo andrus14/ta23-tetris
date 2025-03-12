@@ -11,7 +11,7 @@ class Block {
             canMoveDown = false;
         }
 
-        this.shape.forEach( c => {
+        this.shapes[0].forEach( c => {
 
             let [y, x] = c.split('_');
             const shapeY = parseInt(y) + this.positionY + 1;
