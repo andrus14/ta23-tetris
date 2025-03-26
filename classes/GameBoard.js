@@ -27,7 +27,7 @@ class GameBoard {
     
                 // draw current block
                 let cellCoordinates = (y - currentBlock.positionY) + '_' + (x - currentBlock.positionX);
-                if ( currentBlock.shapes[0].includes(cellCoordinates) ) {
+                if ( currentBlock.shapes[currentBlock.shapeIndex].shape.includes(cellCoordinates) ) {
                     td.classList.add(currentBlock.class);
                 }
     
@@ -44,6 +44,48 @@ class GameBoard {
         
         }
     
+    }
+
+    removeFullRows () {
+
+        for ( let i = 0; i < this.state.length; i++ ) {
+
+            if ( this.state[i].every( cell => cell) ) {
+                this.state.splice(i, 1);
+                this.state.unshift(new Array(this.width).fill(''));
+            }
+
+        }
+
+    }
+
+    drawNextBlock ( nextBlock ) {
+
+        const nextBlockTable = document.getElementById('next-block');
+
+        nextBlockTable.innerHTML = '';
+
+        for ( let y = 0; y < nextBlock.shapes[0].height; y++) {
+
+            const tr = document.createElement('tr');
+
+            for ( let x = 0; x < nextBlock.shapes[0].width; x++) {
+            
+                const td = document.createElement('td');
+                
+                // draw next block
+                let cellCoordinates = y + '_' + x;
+                if ( nextBlock.shapes[0].shape.includes(cellCoordinates) ) {
+                    td.classList.add(nextBlock.class);
+                }
+
+                tr.appendChild(td);
+
+            }
+
+            nextBlockTable.appendChild(tr);
+        }
+
     }
 
 }
