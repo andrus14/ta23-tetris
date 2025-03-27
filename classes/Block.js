@@ -98,7 +98,10 @@ class Block {
         this.shapes[this.shapeIndex].shape.forEach( c => {
     
             let [y, x] = c.split('_');
-            gameBoard.state[parseInt(y) + this.positionY][parseInt(x) + this.positionX] = this.class;
+
+            if ( parseInt(y) + this.positionY >= 0 ) {
+                gameBoard.state[parseInt(y) + this.positionY][parseInt(x) + this.positionX] = this.class;
+            }
     
         });
     
@@ -106,6 +109,25 @@ class Block {
 
     rotate () {
         this.shapeIndex = (this.shapeIndex + 1) % this.shapes.length
+    }
+
+    isGameOver () {
+        
+        let res = false;
+
+        this.shapes[this.shapeIndex].shape.forEach( c => {
+
+            let [y, x] = c.split('_');
+            y = +y + this.positionY;
+            x = +x + this.positionX;
+
+            if ( y <= 0 ) {
+                res = true;
+            }
+
+        });
+
+        return res;
     }
 
 }

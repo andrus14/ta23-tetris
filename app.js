@@ -7,6 +7,9 @@ import { SBlock } from "./classes/SBlock.js";
 import { TBlock } from "./classes/TBlock.js";
 import { ZBlock } from "./classes/ZBlock.js";
 
+let removedRowsTotal = 0;
+let level = 0;
+let score = 0;
 const speed = 400;
 
 const gameBoard = new GameBoard();
@@ -75,18 +78,39 @@ function runGame () {
     gameBoard.draw(currentBlock);
 
     if ( currentBlock.canMoveDown(gameBoard) ) {
+
         currentBlock.moveDown();
+
     } else {
-        currentBlock.stopBlock(gameBoard);
-        gameBoard.removeFullRows();
         
+        currentBlock.stopBlock(gameBoard);
+        
+        if ( currentBlock.isGameOver() ) {
+            
+            gameBoard.draw(currentBlock);
+            clearInterval(intervalId);
+            gameBoard.displayGameOver();
+            return;
+
+        }
+        
+        const removedRowCount = gameBoard.removeFullRows();
+        
+        if ( removedRowCount ) {
+
+            score = gameBoard.updateScore(score, removedRowCount, level);
+            
+            removedRowsTotal += removedRowCount
+            level = gameBoard.updateLevel(removedRowsTotal);
+            
+        }
+
         currentBlock = nextBlock;
         
         blockIndex = Math.floor(Math.random() * blocks.length);
         nextBlock = new blocks[blockIndex](gameBoard.width);
         gameBoard.drawNextBlock(nextBlock);
+
     }
 
 }
-
-

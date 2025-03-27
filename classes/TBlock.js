@@ -17,12 +17,12 @@ class TBlock extends Block {
         {
             height: 2,
             width: 3,
-            shape: ['0_1', '1_0', '1_1', '2_1'],
+            shape: ['0_1', '1_0', '1_1', '1_2'],
         },
         {
             height: 3,
             width: 2,
-            shape: ['0_1', '1_0', '1_1', '1_2'],
+            shape: ['0_1', '1_0', '1_1', '2_1'],
         },
     ];
     shapeIndex = 0;

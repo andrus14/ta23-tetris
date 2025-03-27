@@ -1,7 +1,7 @@
 class GameBoard {
 
-    height = 24;
-    width = 12;
+    height = 18;
+    width = 10;
     gameBoardTable;
     state;
 
@@ -48,14 +48,42 @@ class GameBoard {
 
     removeFullRows () {
 
+        let removedRows = 0;
+
         for ( let i = 0; i < this.state.length; i++ ) {
 
             if ( this.state[i].every( cell => cell) ) {
                 this.state.splice(i, 1);
+                removedRows++;
                 this.state.unshift(new Array(this.width).fill(''));
             }
 
         }
+
+        return removedRows;
+
+    }
+
+    updateScore ( score, removedRows, level ) {
+
+        const coef = [40, 100, 300, 1200];
+
+        const scoreDiv = document.getElementById('score');
+        const newScore = score + coef[removedRows - 1] * (level + 1);
+        scoreDiv.innerText = newScore;
+
+        console.log(score, newScore, removedRows, level, coef[removedRows - 1]);
+
+        return newScore;
+    }
+
+    updateLevel ( removedRows ) {
+
+        const levelDiv = document.getElementById('level');
+        const level = Math.floor(removedRows / 10);
+        levelDiv.innerText = level;
+
+        return level;
 
     }
 
@@ -85,6 +113,13 @@ class GameBoard {
 
             nextBlockTable.appendChild(tr);
         }
+
+    }
+
+    displayGameOver () {
+
+        const gameOverDiv = document.getElementById('game-over');
+        gameOverDiv.classList.remove('hidden');
 
     }
 
